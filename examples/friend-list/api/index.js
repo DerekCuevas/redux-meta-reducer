@@ -16,13 +16,15 @@ export default function search(query, callback) {
     return keep;
   });
 
-  // 1 in 5 requests should fail
-  const error = Math.floor(Math.random() * 5) === 1;
+  // setting a more realistic (random) timeout
+  setTimeout(() => {
+    // ~ 1 in 5 requests should fail
+    const error = Math.floor(Math.random() * 5) === 1;
 
-  if (error) {
-    callback({ message: 'Request Failed' }, []);
-  } else {
-    // setting a more realistic (random) timeout
-    setTimeout(() => callback(false, results), Math.floor(Math.random() * 250));
-  }
+    if (error) {
+      callback({ message: `Request for '${query}' failed.` }, []);
+    } else {
+      callback(false, results);
+    }
+  }, Math.floor(Math.random() * 250));
 }

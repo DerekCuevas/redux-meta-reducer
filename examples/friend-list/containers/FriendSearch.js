@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { setQuery, fetchFriends } from '../actions';
 import SearchInput from '../components/SearchInput';
 import FriendList from '../components/FriendList';
+import ErrorView from '../components/ErrorView';
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -19,7 +20,6 @@ const defaultProps = {
   friends: [],
 };
 
-// TODO: add error state to render
 class FriendSearch extends Component {
   constructor(props, context) {
     super(props, context);
@@ -47,8 +47,25 @@ class FriendSearch extends Component {
     dispatch(fetchFriends(browserHistory));
   }
 
+  renderErrorView() {
+    const { meta: { error: { message } } } = this.props;
+    return (
+      <ErrorView message={message} />
+    );
+  }
+
+  renderFriendList() {
+    const { meta: { isFetching }, friends } = this.props;
+    return (
+      <FriendList
+        isFetching={isFetching}
+        friends={friends}
+      />
+    );
+  }
+
   render() {
-    const { meta: { isFetching }, query, friends } = this.props;
+    const { meta: { error }, query } = this.props;
     return (
       <div className="app">
         <SearchInput
@@ -56,10 +73,7 @@ class FriendSearch extends Component {
           value={query}
           doSearch={this.doSearch}
         />
-        <FriendList
-          isFetching={isFetching}
-          friends={friends}
-        />
+        {error ? this.renderErrorView() : this.renderFriendList()}
       </div>
     );
   }
