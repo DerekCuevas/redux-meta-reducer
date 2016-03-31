@@ -1,4 +1,4 @@
-export default function createMeta({ request, success, failure }) {
+export default function createMeta({ request, success, failure } = {}) {
   const initialState = { isFetching: false, lastUpdated: '', error: false };
 
   return (state = initialState, action = {}) => {
