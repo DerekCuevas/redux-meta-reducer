@@ -4,6 +4,7 @@
   "description": "A redux higher order reducer.",
   "main": "src/index.js",
   "scripts": {
+    "lint": "eslint src/** test/** examples/**",
     "test": "mocha --compilers js:babel-core/register --recursive",
     "test:watch": "npm test -- --watch"
   },
