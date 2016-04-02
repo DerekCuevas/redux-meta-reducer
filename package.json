@@ -1,17 +1,42 @@
 {
   "name": "redux-meta-reducer",
   "version": "0.0.1",
-  "description": "A redux higher order reducer.",
-  "main": "src/index.js",
+  "description": "A redux higher order reducer to simplify the state of fetched data.",
+  "main": "lib/index.js",
+  "jsnext:main": "src/index.js",
+  "homepage": "https://github.com/DerekCuevas/redux-meta-reducer",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DerekCuevas/redux-meta-reducer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DerekCuevas/redux-meta-reducer/issues"
+  },
+  "files": [
+    "src",
+    "lib"
+  ],
   "scripts": {
+    "clean": "rimraf lib",
     "lint": "eslint src/** test/** examples/**",
     "test": "mocha --compilers js:babel-core/register --recursive",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "build": "babel src --out-dir lib",
+    "prepublish": "npm run clean && npm run build"
   },
   "keywords": [
-    "Redux",
-    "Reducer",
-    "Meta"
+    "redux",
+    "higher",
+    "order",
+    "reducer",
+    "meta",
+    "request",
+    "success",
+    "failure",
+    "types"
+  ],
+  "tags": [
+    "redux"
   ],
   "author": "Derek Cuevas <dccuevas2@gmail.com>",
   "license": "MIT",
@@ -22,6 +47,7 @@
     "eslint-config-airbnb": "^6.2.0",
     "eslint-plugin-react": "^4.2.3",
     "expect": "^1.16.0",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "rimraf": "^2.5.2"
   }
 }
