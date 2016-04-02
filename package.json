@@ -29,11 +29,7 @@
     "higher",
     "order",
     "reducer",
-    "meta",
-    "request",
-    "success",
-    "failure",
-    "types"
+    "meta"
   ],
   "tags": [
     "redux"
