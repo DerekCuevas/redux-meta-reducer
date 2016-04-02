@@ -5,6 +5,11 @@ const propTypes = {
   username: PropTypes.string,
 };
 
+const defaultProps = {
+  name: '',
+  username: '',
+};
+
 function FriendThumbnail({ name, username }) {
   return (
     <div className="friend-thumbnail">
@@ -14,4 +19,6 @@ function FriendThumbnail({ name, username }) {
 }
 
 FriendThumbnail.propTypes = propTypes;
+FriendThumbnail.defaultProps = defaultProps;
+
 export default FriendThumbnail;

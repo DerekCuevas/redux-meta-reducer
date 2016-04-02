@@ -9,15 +9,18 @@ import ErrorView from '../components/ErrorView';
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
-  location: PropTypes.object.isRequired,
-  meta: PropTypes.object.isRequired,
-  query: PropTypes.string,
-  friends: PropTypes.array,
+  meta: PropTypes.shape({
+    isFetching: PropTypes.bool,
+    error: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  }).isRequired,
+  search: PropTypes.shape({
+    query: PropTypes.string,
+    friends: PropTypes.array,
+  }).isRequired,
 };
 
 const defaultProps = {
-  query: '',
-  friends: [],
+  search: { query: '', friends: [] },
 };
 
 class FriendSearch extends Component {
@@ -44,28 +47,21 @@ class FriendSearch extends Component {
     const { dispatch } = this.props;
 
     dispatch(setQuery(q));
-    dispatch(fetchFriends(browserHistory));
+    dispatch(fetchFriends);
   }
 
   renderErrorView() {
-    const { meta: { error: { message } } } = this.props;
-    return (
-      <ErrorView message={message} />
-    );
+    const { meta: { error } } = this.props;
+    return <ErrorView message={error.message} />;
   }
 
   renderFriendList() {
-    const { meta: { isFetching }, friends } = this.props;
-    return (
-      <FriendList
-        isFetching={isFetching}
-        friends={friends}
-      />
-    );
+    const { meta: { isFetching }, search: { friends } } = this.props;
+    return <FriendList isFetching={isFetching} friends={friends} />;
   }
 
   render() {
-    const { meta: { error }, query } = this.props;
+    const { meta: { error }, search: { query } } = this.props;
     return (
       <div className="app">
         <SearchInput
@@ -84,6 +80,5 @@ FriendSearch.defaultProps = defaultProps;
 
 export default connect(({ meta, search }) => ({
   meta,
-  query: search.query,
-  friends: search.friends,
+  search,
 }))(FriendSearch);
