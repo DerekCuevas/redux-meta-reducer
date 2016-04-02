@@ -9,12 +9,6 @@ describe('createMeta', () => {
     failure: '@@META/FAILURE',
   };
 
-  const initialState = {
-    isFetching: false,
-    lastUpdated: '',
-    error: false,
-  };
-
   it('Should return a function.', () => {
     const meta = createMeta(types);
     expect(meta).toExist();
@@ -31,6 +25,12 @@ describe('createMeta', () => {
   });
 
   describe('Meta reducer', () => {
+    const initialState = {
+      isFetching: false,
+      lastUpdated: '',
+      error: false,
+    };
+
     it('Should return the correct initial state.', () => {
       expect(createMeta(types)()).toEqual(initialState);
     });
@@ -45,17 +45,17 @@ describe('createMeta', () => {
       });
 
       expect(meta({
-        isFetching: true,
-        lastUpdated: '',
+        isFetching: false,
+        lastUpdated: 'before',
         error: false,
       }, { type: types.request })).toEqual({
         isFetching: true,
-        lastUpdated: '',
+        lastUpdated: 'before',
         error: false,
       });
     });
 
-    it('Should reset isFetching flag, update lastUpdated and clear error on success.', () => {
+    it('Should reset isFetching flag, update lastUpdated, and clear error on success.', () => {
       const meta = createMeta(types);
 
       expect(meta({
@@ -79,7 +79,7 @@ describe('createMeta', () => {
       });
     });
 
-    it('Should reset isFetching flag, update lastUpdated and set error object on failure.', () => {
+    it('Should reset isFetching flag, update lastUpdated, and set error on failure.', () => {
       const meta = createMeta(types);
 
       expect(meta({
@@ -100,6 +100,30 @@ describe('createMeta', () => {
         isFetching: false,
         lastUpdated: 'now',
         error: { message: 'new error' },
+      });
+    });
+
+    it('Should set the correct parameter defaults.', () => {
+      const meta = createMeta(types);
+
+      expect(meta({
+        isFetching: true,
+        lastUpdated: 'before',
+        error: true,
+      }, { type: types.success })).toEqual({
+        isFetching: false,
+        lastUpdated: '',
+        error: false,
+      });
+
+      expect(meta({
+        isFetching: true,
+        lastUpdated: 'before',
+        error: { message: 'old' },
+      }, { type: types.failure })).toEqual({
+        isFetching: false,
+        lastUpdated: '',
+        error: true,
       });
     });
   });

@@ -6,7 +6,7 @@ export default function createMeta({ request, success, failure } = {}) {
   const initialState = { isFetching: false, lastUpdated: '', error: false };
 
   return (state = initialState, action = {}) => {
-    const { now = '', error = false } = action;
+    const { now = '', error = true } = action;
 
     switch (action.type) {
       case request:
