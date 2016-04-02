@@ -1,8 +1,8 @@
 # Redux Meta Reducer
 A redux higher order reducer to simplify the state of fetched data. Reduces the amount of boilerplate in reducers and allows for separation of  meta data from fetched data.
 
-## Examples
-Examples can be found in [examples](/examples).
+## Why?
+This library may be better suited for a gist (copy/paste), however I find keeping isFetching / lastUpdated / error states along side state to be extremely common. Abstracting meta state into a reusable and testable higher order reducer seemed like a good idea.
 
 ## Setup
 Install via npm.
@@ -17,7 +17,7 @@ Import the createMeta higher order function. With ES2015 modules:
 import createMeta from 'redux-meta-reducer';
 ```
 
-Or with ES5 and CommonJS (* don't forget _.default_):
+Or with ES5 and CommonJS (don't forget _.default_):
 ```javascript
 var createMeta = require('redux-meta-reducer').default;
 ```
@@ -59,5 +59,5 @@ reducer(); /* =>
 */
 ```
 
-## Why?
-This library may be better suited for a gist (copy/paste), however I find keeping isFetching / lastUpdated / error states along side state to be extremely common. Abstracting this into a reusable and testable higher order reducer seemed like a good idea.
+## Examples
+Examples can be found in [examples](/examples).
