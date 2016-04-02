@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 
 import configureStore from './store/configureStore';
-import FriendSearch from './containers/FriendSearch';
+import FriendSearchView from './containers/FriendSearchView';
 
 const store = configureStore();
 
@@ -12,7 +12,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/">
-        <IndexRoute component={FriendSearch} />
+        <IndexRoute component={FriendSearchView} />
       </Route>
     </Router>
   </Provider>,

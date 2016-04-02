@@ -2,10 +2,10 @@ import React, { PropTypes, Component } from 'react';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
-import { setQuery, fetchFriends } from '../actions';
 import SearchInput from '../components/SearchInput';
 import FriendList from '../components/FriendList';
 import ErrorView from '../components/ErrorView';
+import { setQuery, fetchFriends } from '../actions';
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -47,7 +47,7 @@ class FriendSearch extends Component {
     const { dispatch } = this.props;
 
     dispatch(setQuery(q));
-    dispatch(fetchFriends);
+    dispatch(fetchFriends(browserHistory));
   }
 
   renderErrorView() {

@@ -26,6 +26,7 @@ function SearchInput(props) {
       {...props}
       type="search"
       id="search-input"
+      autoComplete="off"
       value={value}
       onChange={onChange}
       onKeyDown={onKeyDown}
