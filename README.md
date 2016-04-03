@@ -1,8 +1,8 @@
 # Redux Meta Reducer
-A redux higher order reducer to simplify the state of fetched data. Reduces the amount of boilerplate in reducers and allows for separation of  meta data from fetched data.
+A redux higher order reducer to simplify the state of fetched data. Reduces the amount of boilerplate in reducers and allows for separation of meta data from fetched data.
 
 ## Why?
-Keeping isFetching, lastUpdated, and error states (I'm calling this meta state) along side fetched state is common. Replicating logic of how to update this meta state across multiple reducers can be mundane and repetitive. This library abstracts meta state into a reusable and testable higher order reducer that comes preloaded with the ability to update these meta-states according to specified request, success, and failure action types.
+Keeping isFetching, lastUpdated, and error states (I'm calling this meta state) along side fetched state is common. Replicating logic of how to update this meta state across multiple reducers can be mundane and repetitive. This library abstracts meta state into a reusable and testable higher order reducer that comes preloaded with the ability to update these meta states according to specified request, success, and failure action types.
 
 ## Setup
 Install via npm.
@@ -23,6 +23,7 @@ var createMeta = require('redux-meta-reducer').default;
 ```
 
 ## Using it
+Use redux's [combineReducers](http://redux.js.org/docs/api/combineReducers.html) to functionally compose the meta reducer into your fetched resource reducer.
 ```javascript
 import createMeta from 'redux-meta-reducer';
 import { combineReducers } from 'redux';

@@ -1,0 +1,27 @@
+{
+  "name": "basic",
+  "version": "0.0.1",
+  "description": "redux-meta-reducer basic example",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Derek Cuevas",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.4",
+    "redux": "^3.3.0",
+    "redux-meta-reducer": "0.0.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.2",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-react-hmre": "^1.1.0",
+    "redux-logger": "^2.5.0",
+    "webpack": "^1.12.13",
+    "webpack-dev-middleware": "^1.5.1",
+    "webpack-hot-middleware": "^2.6.4"
+  }
+}
