@@ -63,9 +63,9 @@ The meta state will respond to all three action types:
 - **request**:
 The isFetching flag will be set to true.
 - **success**:
-The isFetching flag is set to false, lastUpdated will be set to _action.now_, and error will be set to false.
+The isFetching flag is set to false, lastUpdated will be set to `action.now`, and error will be set to false.
 - **failure**:
-The isFetching flag is set to false, lastUpdated will be set to _action.now_, and error will be set to _action.error_ which can be an error object describing the error.
+The isFetching flag is set to false, lastUpdated will be set to `action.now`, and error will be set to `action.error` which can be an error object describing the error.
 
 ## Examples
 Currently there are two examples, check out the [basic](/examples/basic) example for the bare minimum setup and [friend-list](/examples/friend-list) for a more realistic react/redux example.
