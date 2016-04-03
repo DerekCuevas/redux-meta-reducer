@@ -24,6 +24,7 @@ var createMeta = require('redux-meta-reducer').default;
 
 ## Using it
 Create a meta reducer with the createMeta HOF specifying the desired request, success, and failure action types. Use redux's [combineReducers](http://redux.js.org/docs/api/combineReducers.html) to functionally compose the created meta reducer into your fetched resource reducer.
+
 ```javascript
 import createMeta from 'redux-meta-reducer';
 import { combineReducers } from 'redux';
