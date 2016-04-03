@@ -23,7 +23,7 @@ var createMeta = require('redux-meta-reducer').default;
 ```
 
 ## Using it
-Use redux's [combineReducers](http://redux.js.org/docs/api/combineReducers.html) to functionally compose the meta reducer into your fetched resource reducer.
+Create a meta reducer with the createMeta HOF specifying the desired request, success, and failure action types. Use redux's [combineReducers](http://redux.js.org/docs/api/combineReducers.html) to functionally compose the created meta reducer into your fetched resource reducer.
 ```javascript
 import createMeta from 'redux-meta-reducer';
 import { combineReducers } from 'redux';
@@ -58,10 +58,23 @@ reducer(); /* =>
   resource: { users: [] }
 }
 */
+
+/*
+The meta state will respond to all three action types.
+
+- On request:
+The isFetching flag will be set to true.
+
+- On success:
+The isFetching flag is set to false, lastUpdated will be set to action.now, and error will be set to false.
+
+- On failure:
+The isFetching flag is set to false, lastUpdated will be set to action.now, and error will be set to action.error which can be an error object describing the error.
+ */
 ```
 
 ## Examples
 Currently there are two examples, check out the [basic](/examples/basic) example for the bare minimum setup and [friend-list](/examples/friend-list) for a more realistic react/redux example.
 
 ## Contributing
-Want to contribute? File an issue or send in a PR. I am currently interested in ways to make createMeta more extensible, such as adding the ability to easily extend or alter the behavior of the meta state reducer, however I have not thought of a good way to do this yet. If you have any ideas please let me know!
+Want to contribute? File an issue or send in a PR. I am currently interested in ways to make createMeta more extensible, such as adding the ability to easily extend or alter the behavior of the meta reducer, however I have not thought of a good way to do this yet. If you have any ideas please let me know!
