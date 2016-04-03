@@ -5,12 +5,14 @@ import { connect } from 'react-redux';
 import SearchInput from '../components/SearchInput';
 import FriendList from '../components/FriendList';
 import ErrorView from '../components/ErrorView';
+import Stats from '../components/Stats';
 import { setQuery, fetchFriends } from '../actions';
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
   meta: PropTypes.shape({
     isFetching: PropTypes.bool,
+    lastUpdated: PropTypes.string,
     error: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   }).isRequired,
   search: PropTypes.shape({
@@ -61,7 +63,7 @@ class FriendSearch extends Component {
   }
 
   render() {
-    const { meta: { error }, search: { query } } = this.props;
+    const { meta: { error, lastUpdated }, search: { query } } = this.props;
     return (
       <div className="app">
         <SearchInput
@@ -70,6 +72,7 @@ class FriendSearch extends Component {
           doSearch={this.doSearch}
         />
         {error ? this.renderErrorView() : this.renderFriendList()}
+        <Stats lastUpdated={lastUpdated} />
       </div>
     );
   }
@@ -78,7 +81,4 @@ class FriendSearch extends Component {
 FriendSearch.propTypes = propTypes;
 FriendSearch.defaultProps = defaultProps;
 
-export default connect(({ meta, search }) => ({
-  meta,
-  search,
-}))(FriendSearch);
+export default connect(state => state)(FriendSearch);
