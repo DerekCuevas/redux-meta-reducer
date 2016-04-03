@@ -60,11 +60,11 @@ reducer(); /* =>
 */
 ```
 The meta state will respond to all three action types:
-- On **request**:
+- **request**:
 The isFetching flag will be set to true.
-- On **success**:
+- **success**:
 The isFetching flag is set to false, lastUpdated will be set to action.now, and error will be set to false.
-- On **failure**:
+- **failure**:
 The isFetching flag is set to false, lastUpdated will be set to action.now, and error will be set to action.error which can be an error object describing the error.
 
 ## Examples
