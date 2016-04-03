@@ -1,5 +1,5 @@
 # Redux Meta Reducer
-A redux higher order reducer to simplify the state of fetched data. Reduces the amount of boilerplate in reducers and allows for separation of meta data from fetched data :collision:.
+A [redux](https://github.com/reactjs/redux) higher order reducer to simplify the state of fetched data. Reduces the amount of boilerplate in reducers and allows for separation of meta data from fetched data :collision:.
 
 ## Why?
 Keeping isFetching, lastUpdated, and error states (I'm calling this meta state) along side fetched state is common. Replicating logic of how to update this meta state across multiple reducers can be mundane and repetitive. This library abstracts meta state into a reusable and testable higher order reducer that comes preloaded with the ability to update these meta states according to specified request, success, and failure action types.
