@@ -61,4 +61,7 @@ reducer(); /* =>
 ```
 
 ## Examples
-Examples can be found in [examples](/examples).
+Currently there are two examples, check out the [basic](/examples/basic) example for the bare minimum setup and [friend-list](/examples/friend-list) for a more realistic react/redux example.
+
+## Contributing
+Want to contribute? File an issue or send in a PR. I am currently interested in ways to make createMeta more extensible, such as adding the ability to easily extend or alter the behavior of the meta state reducer, however I have not thought of a good way to do this yet. If you have any ideas please let me know!
