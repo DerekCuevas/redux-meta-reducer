@@ -10,7 +10,7 @@ export default function createMeta({ request, success, failure } = {}) {
 
     switch (action.type) {
       case request:
-        return { isFetching: true, lastUpdated: state.lastUpdated, error: state.error };
+        return Object.assign({}, state, { isFetching: true });
       case success:
         return { isFetching: false, lastUpdated: now, error: false };
       case failure:
