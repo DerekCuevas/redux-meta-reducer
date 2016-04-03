@@ -43,6 +43,10 @@ describe('createMeta', () => {
         lastUpdated: '',
         error: false,
       });
+    });
+
+    it('Should preserve previous lastUpdated and error states on request.', () => {
+      const meta = createMeta(types);
 
       expect(meta({
         isFetching: false,
@@ -52,6 +56,16 @@ describe('createMeta', () => {
         isFetching: true,
         lastUpdated: 'before',
         error: false,
+      });
+
+      expect(meta({
+        isFetching: false,
+        lastUpdated: 'before',
+        error: { msg: 'Old error!' },
+      }, { type: types.request })).toEqual({
+        isFetching: true,
+        lastUpdated: 'before',
+        error: { msg: 'Old error!' },
       });
     });
 
