@@ -58,23 +58,17 @@ reducer(); /* =>
   resource: { users: [] }
 }
 */
-
-/*
-The meta state will respond to all three action types.
-
-- On request:
-The isFetching flag will be set to true.
-
-- On success:
-The isFetching flag is set to false, lastUpdated will be set to action.now, and error will be set to false.
-
-- On failure:
-The isFetching flag is set to false, lastUpdated will be set to action.now, and error will be set to action.error which can be an error object describing the error.
- */
 ```
+The meta state will respond to all three action types:
+- On **request**:
+The isFetching flag will be set to true.
+- On **success**:
+The isFetching flag is set to false, lastUpdated will be set to action.now, and error will be set to false.
+- On **failure**:
+The isFetching flag is set to false, lastUpdated will be set to action.now, and error will be set to action.error which can be an error object describing the error.
 
 ## Examples
 Currently there are two examples, check out the [basic](/examples/basic) example for the bare minimum setup and [friend-list](/examples/friend-list) for a more realistic react/redux example.
 
 ## Contributing
-Want to contribute? File an issue or send in a PR. I am currently interested in ways to make createMeta more extensible, such as adding the ability to easily extend or alter the behavior of the meta reducer, however I have not thought of a good way to do this yet. If you have any ideas please let me know!
+Want to contribute? File an issue or send in a PR. I am currently interested in ways to make createMeta more extensible, such as adding the ability to easily extend or alter the behavior of the meta reducer. However I have not yet thought of a good way to do this. If you have any ideas please let me know!
