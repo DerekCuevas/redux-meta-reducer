@@ -21,10 +21,6 @@ const propTypes = {
   }).isRequired,
 };
 
-const defaultProps = {
-  search: { query: '', friends: [] },
-};
-
 class FriendSearch extends Component {
   constructor(props, context) {
     super(props, context);
@@ -79,6 +75,4 @@ class FriendSearch extends Component {
 }
 
 FriendSearch.propTypes = propTypes;
-FriendSearch.defaultProps = defaultProps;
-
 export default connect(state => state)(FriendSearch);

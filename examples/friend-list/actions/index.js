@@ -9,14 +9,12 @@ export function requestFriends() {
   return { type: types.REQUEST_FRIENDS };
 }
 
-export function receiveFriendsSuccess(friends, when) {
-  const now = when || (new Date()).toISOString();
-  return { type: types.RECEIVE_FRIENDS_SUCCESS, friends, now };
+export function receiveFriendsSuccess(friends) {
+  return { type: types.RECEIVE_FRIENDS_SUCCESS, friends, now: (new Date()).toISOString() };
 }
 
-export function receiveFriendsFailure(error, when) {
-  const now = when || (new Date()).toISOString();
-  return { type: types.RECEIVE_FRIENDS_FAILURE, error, now };
+export function receiveFriendsFailure(error) {
+  return { type: types.RECEIVE_FRIENDS_FAILURE, error, now: (new Date()).toISOString() };
 }
 
 export function fetchFriends(history) {
