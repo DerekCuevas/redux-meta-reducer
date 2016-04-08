@@ -12,7 +12,7 @@ const propTypes = {
   dispatch: PropTypes.func.isRequired,
   meta: PropTypes.shape({
     isFetching: PropTypes.bool,
-    lastUpdated: PropTypes.string,
+    lastUpdated: PropTypes.number,
     error: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   }).isRequired,
   search: PropTypes.shape({
@@ -21,7 +21,7 @@ const propTypes = {
   }).isRequired,
 };
 
-class FriendSearch extends Component {
+class FriendSearchView extends Component {
   constructor(props, context) {
     super(props, context);
     this.doSearch = this.doSearch.bind(this);
@@ -68,11 +68,11 @@ class FriendSearch extends Component {
           doSearch={this.doSearch}
         />
         {error ? this.renderErrorView() : this.renderFriendList()}
-        <Stats lastUpdated={lastUpdated} />
+        <Stats lastUpdated={(new Date(lastUpdated)).toString()} />
       </div>
     );
   }
 }
 
-FriendSearch.propTypes = propTypes;
-export default connect(state => state)(FriendSearch);
+FriendSearchView.propTypes = propTypes;
+export default connect(state => state)(FriendSearchView);

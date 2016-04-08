@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
 import createMeta from 'redux-meta-reducer';
+import { combineReducers } from 'redux';
 import * as types from '../constants/actionTypes';
 
 const initialState = {

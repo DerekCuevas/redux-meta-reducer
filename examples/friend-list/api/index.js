@@ -22,7 +22,7 @@ export default function search(query, callback) {
     const error = Math.floor(Math.random() * 5) === 1;
 
     if (error) {
-      callback({ message: `Request for '${query}' failed.` }, []);
+      callback({ message: `Request for '${query}' failed.` });
     } else {
       callback(false, results);
     }
