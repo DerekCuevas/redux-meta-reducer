@@ -16,7 +16,7 @@
     "react-redux": "^4.4.0",
     "react-router": "^2.0.0",
     "redux": "^3.3.0",
-    "redux-meta-reducer": "0.0.2",
+    "redux-meta-reducer": "0.0.3",
     "redux-thunk": "^1.0.3"
   },
   "devDependencies": {

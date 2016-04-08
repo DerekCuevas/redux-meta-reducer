@@ -11,7 +11,7 @@
   "dependencies": {
     "express": "^4.13.4",
     "redux": "^3.3.0",
-    "redux-meta-reducer": "0.0.2"
+    "redux-meta-reducer": "0.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.4.5",

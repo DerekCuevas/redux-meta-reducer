@@ -68,7 +68,7 @@ class FriendSearchView extends Component {
           doSearch={this.doSearch}
         />
         {error ? this.renderErrorView() : this.renderFriendList()}
-        <Stats lastUpdated={(new Date(lastUpdated)).toString()} />
+        <Stats lastUpdated={lastUpdated ? (new Date(lastUpdated)).toString() : ''} />
       </div>
     );
   }
