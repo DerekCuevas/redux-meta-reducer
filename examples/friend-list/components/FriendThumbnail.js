@@ -12,9 +12,9 @@ const defaultProps = {
 
 function FriendThumbnail({ name, username }) {
   return (
-    <div className="friend-thumbnail">
-      <h4>{name} <span className="username">{username}</span></h4>
-    </div>
+    <h4 className="friend-thumbnail">
+      {name} <span className="username">{username}</span>
+    </h4>
   );
 }
 
