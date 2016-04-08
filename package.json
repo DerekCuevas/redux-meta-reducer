@@ -1,6 +1,6 @@
 {
   "name": "redux-meta-reducer",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A redux higher order reducer to simplify the state of fetched data.",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
