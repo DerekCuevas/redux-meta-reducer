@@ -27,7 +27,7 @@ describe('createMeta', () => {
   describe('Meta reducer', () => {
     const initialState = {
       isFetching: false,
-      lastUpdated: '',
+      lastUpdated: undefined,
       error: false,
     };
 
@@ -40,7 +40,7 @@ describe('createMeta', () => {
 
       expect(meta(initialState, { type: types.request })).toEqual({
         isFetching: true,
-        lastUpdated: '',
+        lastUpdated: undefined,
         error: false,
       });
     });
@@ -126,7 +126,7 @@ describe('createMeta', () => {
         error: true,
       }, { type: types.success })).toEqual({
         isFetching: false,
-        lastUpdated: '',
+        lastUpdated: undefined,
         error: false,
       });
 
@@ -136,7 +136,7 @@ describe('createMeta', () => {
         error: { message: 'old' },
       }, { type: types.failure })).toEqual({
         isFetching: false,
-        lastUpdated: '',
+        lastUpdated: undefined,
         error: true,
       });
     });
