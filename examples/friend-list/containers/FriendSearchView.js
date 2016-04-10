@@ -6,10 +6,12 @@ import SearchInput from '../components/SearchInput';
 import FriendList from '../components/FriendList';
 import ErrorView from '../components/ErrorView';
 import Stats from '../components/Stats';
+
 import { setQuery, fetchFriends } from '../actions';
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
+  location: PropTypes.object.isRequired,
   meta: PropTypes.shape({
     isFetching: PropTypes.bool,
     lastUpdated: PropTypes.number,
@@ -22,22 +24,18 @@ const propTypes = {
 };
 
 class FriendSearchView extends Component {
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
     this.doSearch = this.doSearch.bind(this);
   }
 
   componentDidMount() {
-    this.unlisten = browserHistory.listen(location => {
-      if (location.action === 'POP') {
-        this.doSearch(location.query.q);
-      }
-    });
+    this.doSearch(this.props.location.query.q);
   }
 
-  componentWillUnmount() {
-    if (this.unlisten) {
-      this.unlisten();
+  componentWillReceiveProps({ location }) {
+    if (location.action === 'POP' && (location.search !== this.props.location.search)) {
+      this.doSearch(location.query.q);
     }
   }
 
