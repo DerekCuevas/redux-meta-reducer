@@ -13,10 +13,13 @@ function search(state = initialState, action = {}) {
   switch (action.type) {
     case types.SET_QUERY:
       return Object.assign({}, state, { query });
+
     case types.RECEIVE_FRIENDS_SUCCESS:
       return Object.assign({}, state, { friends });
+
     case types.RECEIVE_FRIENDS_FAILURE:
       return Object.assign({}, state, { friends: [] });
+
     default:
       return state;
   }
