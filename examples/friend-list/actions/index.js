@@ -10,11 +10,11 @@ export function requestFriends() {
 }
 
 export function receiveFriendsSuccess(friends) {
-  return { type: types.RECEIVE_FRIENDS_SUCCESS, friends, now: Date.now() };
+  return { type: types.RECEIVE_FRIENDS_SUCCESS, now: Date.now(), friends };
 }
 
 export function receiveFriendsFailure(error) {
-  return { type: types.RECEIVE_FRIENDS_FAILURE, error, now: Date.now() };
+  return { type: types.RECEIVE_FRIENDS_FAILURE, now: Date.now(), error };
 }
 
 export function fetchFriends(history) {

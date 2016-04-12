@@ -33,11 +33,11 @@ function requestUsers() {
 }
 
 function receiveUsersSuccess(users) {
-  return { type: 'RECEIVE_USERS_SUCCESS', users, now: (new Date()).toISOString() };
+  return { type: 'RECEIVE_USERS_SUCCESS', now: Date.now(), users };
 }
 
 function receiveUsersFailure(error) {
-  return { type: 'RECEIVE_USERS_FAILURE', error, now: (new Date()).toISOString() };
+  return { type: 'RECEIVE_USERS_FAILURE', now: Date.now(), error };
 }
 
 const store = createStore(reducer, applyMiddleware(createLogger()));
