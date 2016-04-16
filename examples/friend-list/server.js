@@ -1,11 +1,13 @@
+const express = require('express');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('./webpack.config');
 
-const app = new (require('express'))();
-const port = 3000;
+const app = express();
 const compiler = webpack(config);
+
+app.set('port', process.env.PORT || 3000);
 
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
@@ -17,10 +19,10 @@ app.get('/', (req, res) => {
   res.sendFile(`${__dirname}/index.html`);
 });
 
-app.listen(port, error => {
+app.listen(app.get('port'), error => {
   if (error) {
     console.error(error);
   } else {
-    console.info('==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.', port, port);
+    console.log(`=> app in ${app.get('env')} at http://localhost:${app.get('port')}`);
   }
 });

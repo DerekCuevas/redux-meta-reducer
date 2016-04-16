@@ -18,10 +18,9 @@
   ],
   "scripts": {
     "clean": "rimraf lib",
-    "lint": "eslint src/** test/** examples/**",
+    "lint": "eslint src test examples",
     "test": "mocha --compilers js:babel-core/register --recursive",
     "test:watch": "npm test -- --watch",
-    "check": "npm run lint && npm test",
     "build": "babel src --out-dir lib",
     "prepublish": "npm run clean && npm test && npm run build"
   },
