@@ -55,7 +55,7 @@ const reducer = combineReducers({
 
 reducer(); /* =>
 {
-  meta: { isFetching: false, lastUpdated: '', error: false },
+  meta: { isFetching: false, lastUpdated: undefined, error: false },
   resource: { users: [] }
 }
 */
