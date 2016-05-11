@@ -1,17 +1,17 @@
 export default function createMeta(type) {
-  let sameActionType = false;
+  let sameActionType = true;
   let actionTypes = { request: 'request', success: 'success', failure: 'failure' };
 
   if (typeof type === 'string') {
     if (!type.length) {
       throw new Error('Missing action type given to createMeta.');
     }
-    sameActionType = true;
   } else {
     const { request, success, failure } = type;
     if (!request || !success || !failure) {
       throw new Error('Missing or invalid action type(s) given to createMeta.');
     }
+    sameActionType = false;
     actionTypes = { request, success, failure };
   }
 
