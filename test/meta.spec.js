@@ -1,34 +1,6 @@
 import expect from 'expect';
 import createMeta from '../src';
-
-const types = {
-  request: '@@META/REQUEST',
-  success: '@@META/SUCCESS',
-  failure: '@@META/FAILURE',
-};
-
-const type = '@@META/FETCH';
-
-function request(singleType = false) {
-  if (singleType) {
-    return { type, status: 'request' };
-  }
-  return { type: types.request };
-}
-
-function responseSuccess(singleType = false, now) {
-  if (singleType) {
-    return { type, status: 'success', now };
-  }
-  return { type: types.success, now };
-}
-
-function responseFailure(singleType = false, now, error) {
-  if (singleType) {
-    return { type, status: 'failure', now, error };
-  }
-  return { type: types.failure, now, error };
-}
+import { types, type, request, responseSuccess, responseFailure } from './helpers';
 
 describe('createMeta', () => {
   it('Should return a reducer function.', () => {
@@ -137,6 +109,7 @@ describe('createMeta', () => {
       expect(meta(state, responseFailure(false, 'now', {
         message: 'new error',
       }))).toEqual(nextState);
+
       expect(metaSingleType(state, responseFailure(true, 'now', {
         message: 'new error',
       }))).toEqual(nextState);
