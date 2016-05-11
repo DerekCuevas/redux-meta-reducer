@@ -81,7 +81,7 @@ The isFetching flag is set to false, lastUpdated will be set to `action.now`, an
 The isFetching flag is set to false, lastUpdated will be set to `action.now`, and error will be set to `action.error` which can be an error object describing the error.
 
 ## Examples
-Currently there are three examples, check out the [basic](/examples/basic) example for the bare minimum setup, the [basic-single-type](/examples/basic-single-type) example for example use with a single action type and [friend-list](/examples/friend-list) for a more realistic react/redux example.
+Currently there are three examples, check out the [basic](/examples/basic) example for the bare minimum setup, the [basic-single-type](/examples/basic-single-type) example for use with a single action type and [friend-list](/examples/friend-list) for a more realistic react/redux example.
 
 ## Contributing
 Want to contribute? File an issue or send in a PR. I am currently interested in ways to make createMeta more extensible, such as adding the ability to easily extend or alter the behavior of the meta reducer. However I have not yet thought of a good way to do this. If you have any ideas please let me know!
