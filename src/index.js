@@ -1,6 +1,18 @@
-export default function createMeta({ request, success, failure } = {}) {
-  if (!request || !success || !failure) {
-    throw new Error('Missing or invalid action type(s) given to createMeta.');
+export default function createMeta(type) {
+  let sameActionType = false;
+  let actionTypes = { request: 'request', success: 'success', failure: 'failure' };
+
+  if (typeof type === 'string') {
+    if (!type.length) {
+      throw new Error('Missing action type given to createMeta.');
+    }
+    sameActionType = true;
+  } else {
+    const { request, success, failure } = type;
+    if (!request || !success || !failure) {
+      throw new Error('Missing or invalid action type(s) given to createMeta.');
+    }
+    actionTypes = { request, success, failure };
   }
 
   const initialState = { isFetching: false, lastUpdated: undefined, error: false };
@@ -8,12 +20,16 @@ export default function createMeta({ request, success, failure } = {}) {
   return (state = initialState, action = {}) => {
     const { error = true } = action;
 
-    switch (action.type) {
-      case request:
+    if (sameActionType && action.type !== type) {
+      return state;
+    }
+
+    switch (sameActionType ? action.status : action.type) {
+      case actionTypes.request:
         return Object.assign({}, state, { isFetching: true });
-      case success:
+      case actionTypes.success:
         return { isFetching: false, lastUpdated: action.now, error: false };
-      case failure:
+      case actionTypes.failure:
         return { isFetching: false, lastUpdated: action.now, error };
       default:
         return state;

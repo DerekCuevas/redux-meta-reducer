@@ -22,7 +22,7 @@ module.exports = {
         test: /\.js$/,
         loaders: ['babel'],
         exclude: /node_modules/,
-        include: __dirname,
+        include: [__dirname, path.join(__dirname, '../../src')],
       },
     ],
   },

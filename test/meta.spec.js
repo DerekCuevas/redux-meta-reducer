@@ -1,22 +1,50 @@
 import expect from 'expect';
 import createMeta from '../src';
 
-describe('createMeta', () => {
-  // mock types for testing only
-  const types = {
-    request: '@@META/REQUEST',
-    success: '@@META/SUCCESS',
-    failure: '@@META/FAILURE',
-  };
+const types = {
+  request: '@@META/REQUEST',
+  success: '@@META/SUCCESS',
+  failure: '@@META/FAILURE',
+};
 
-  it('Should return a function.', () => {
+const type = '@@META/FETCH';
+
+function request(singleType = false) {
+  if (singleType) {
+    return { type, status: 'request' };
+  }
+  return { type: types.request };
+}
+
+function responseSuccess(singleType = false, now) {
+  if (singleType) {
+    return { type, status: 'success', now };
+  }
+  return { type: types.success, now };
+}
+
+function responseFailure(singleType = false, now, error) {
+  if (singleType) {
+    return { type, status: 'failure', now, error };
+  }
+  return { type: types.failure, now, error };
+}
+
+describe('createMeta', () => {
+  it('Should return a reducer function.', () => {
     const meta = createMeta(types);
+    const metaSingleType = createMeta(type);
+
     expect(meta).toExist();
     expect(typeof meta).toEqual('function');
+
+    expect(metaSingleType).toExist();
+    expect(typeof metaSingleType).toEqual('function');
   });
 
   it('Should throw if any types are undefined or empty.', () => {
     expect(createMeta).toThrow();
+    expect(createMeta).withArgs('').toThrow();
     expect(createMeta).withArgs({
       request: '',
       success: 'should-throw',
@@ -33,112 +61,114 @@ describe('createMeta', () => {
 
     it('Should return the correct initial state.', () => {
       expect(createMeta(types)()).toEqual(initialState);
+      expect(createMeta(type)()).toEqual(initialState);
     });
 
     it('Should set isFetching flag on request.', () => {
       const meta = createMeta(types);
+      const metaSingleType = createMeta(type);
 
-      expect(meta(initialState, { type: types.request })).toEqual({
+      const nextState = {
         isFetching: true,
         lastUpdated: undefined,
         error: false,
-      });
+      };
+
+      expect(meta(initialState, request())).toEqual(nextState);
+      expect(metaSingleType(initialState, request(true))).toEqual(nextState);
     });
 
     it('Should preserve previous lastUpdated and error states on request.', () => {
       const meta = createMeta(types);
+      const metaSingleType = createMeta(type);
 
-      expect(meta({
-        isFetching: false,
-        lastUpdated: 'before',
-        error: false,
-      }, { type: types.request })).toEqual({
-        isFetching: true,
-        lastUpdated: 'before',
-        error: false,
-      });
-
-      expect(meta({
+      const state = {
         isFetching: false,
         lastUpdated: 'before',
         error: { msg: 'Old error!' },
-      }, { type: types.request })).toEqual({
+      };
+
+      const nextState = {
         isFetching: true,
         lastUpdated: 'before',
         error: { msg: 'Old error!' },
-      });
+      };
+
+      expect(meta(state, request())).toEqual(nextState);
+      expect(metaSingleType(state, request(true))).toEqual(nextState);
     });
 
     it('Should reset isFetching flag, update lastUpdated, and clear error on success.', () => {
       const meta = createMeta(types);
+      const metaSingleType = createMeta(type);
 
-      expect(meta({
-        isFetching: true,
-        lastUpdated: '',
-        error: false,
-      }, { type: types.success, now: 'now' })).toEqual({
-        isFetching: false,
-        lastUpdated: 'now',
-        error: false,
-      });
-
-      expect(meta({
+      const state = {
         isFetching: true,
         lastUpdated: 'before',
         error: { message: 'Previous error.' },
-      }, { type: types.success, now: 'now' })).toEqual({
+      };
+
+      const nextState = {
         isFetching: false,
         lastUpdated: 'now',
         error: false,
-      });
+      };
+
+      expect(meta(state, responseSuccess(false, 'now'))).toEqual(nextState);
+      expect(metaSingleType(state, responseSuccess(true, 'now'))).toEqual(nextState);
     });
 
     it('Should reset isFetching flag, update lastUpdated, and set error on failure.', () => {
       const meta = createMeta(types);
+      const metaSingleType = createMeta(type);
 
-      expect(meta({
-        isFetching: true,
-        lastUpdated: '',
-        error: false,
-      }, { type: types.failure, now: 'now', error: { message: 'error' } })).toEqual({
-        isFetching: false,
-        lastUpdated: 'now',
-        error: { message: 'error' },
-      });
-
-      expect(meta({
+      const state = {
         isFetching: true,
         lastUpdated: '',
         error: { message: 'old error' },
-      }, { type: types.failure, now: 'now', error: { message: 'new error' } })).toEqual({
+      };
+
+      const nextState = {
         isFetching: false,
         lastUpdated: 'now',
         error: { message: 'new error' },
-      });
+      };
+
+      expect(meta(state, responseFailure(false, 'now', {
+        message: 'new error',
+      }))).toEqual(nextState);
+      expect(metaSingleType(state, responseFailure(true, 'now', {
+        message: 'new error',
+      }))).toEqual(nextState);
     });
 
     it('Should set the correct parameter defaults.', () => {
       const meta = createMeta(types);
+      const metaSingleType = createMeta(type);
 
-      expect(meta({
-        isFetching: true,
-        lastUpdated: 'before',
-        error: true,
-      }, { type: types.success })).toEqual({
-        isFetching: false,
-        lastUpdated: undefined,
-        error: false,
-      });
-
-      expect(meta({
+      const state = {
         isFetching: true,
         lastUpdated: 'before',
         error: { message: 'old' },
-      }, { type: types.failure })).toEqual({
+      };
+
+      const nextStateSuccess = {
+        isFetching: false,
+        lastUpdated: undefined,
+        error: false,
+      };
+
+      const nextStateFailure = {
         isFetching: false,
         lastUpdated: undefined,
         error: true,
-      });
+      };
+
+      expect(meta(state, responseSuccess())).toEqual(nextStateSuccess);
+      expect(meta(state, responseFailure())).toEqual(nextStateFailure);
+
+      expect(metaSingleType(state, responseSuccess(true))).toEqual(nextStateSuccess);
+      expect(metaSingleType(state, responseFailure(true))).toEqual(nextStateFailure);
     });
   });
 });
