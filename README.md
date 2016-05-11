@@ -54,7 +54,8 @@ const reducer = combineReducers({
   resource,
 });
 
-// Or like this: (See the basic-single-type example, reducer and action creators would need to be modified)
+// Or like this:
+// See the basic-single-type example, reducer and action creators would need to be modified
 const reducer = combineReducers({
   meta: createMeta('FETCH_USERS'),
   resource,
