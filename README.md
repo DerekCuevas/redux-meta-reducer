@@ -44,6 +44,7 @@ function resource(state = initialState, action = {}) {
   }
 }
 
+// There are two ways to create a meta reducer. Like this:
 const reducer = combineReducers({
   meta: createMeta({
     request: 'REQUEST_USERS',
@@ -53,17 +54,11 @@ const reducer = combineReducers({
   resource,
 });
 
-/*
-The createMeta HOF optionally supports a single action type to be used for request,
-success, and failure actions. Meta state transitions will switch on the `action.status` field
-if only one action type is specified. See the basic-single-type example for more.
-
-ex.)
+// Or like this: (See the basic-single-type example, reducer and action creators would need to be modified)
 const reducer = combineReducers({
   meta: createMeta('FETCH_USERS'),
   resource,
 });
- */
 
 reducer(); /* =>
 {
